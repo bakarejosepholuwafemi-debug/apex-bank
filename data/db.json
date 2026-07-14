@@ -1,0 +1,234 @@
+{
+  "users": [
+    {
+      "id": "user_alex",
+      "username": "alex_banks",
+      "email": "alex@apex.com",
+      "password": "$2a$10$UzjppcgDMN5ogqlx4UGPUevKZstIw1FYULMzdJZ/Ehf.6YI3xC6dy",
+      "fullName": "Alex Banks",
+      "accountNumber": "9098765432",
+      "balance": 250500.75,
+      "wealthBalance": 50000,
+      "createdAt": "2026-01-15T08:30:00.000Z"
+    },
+    {
+      "id": "user_sarah",
+      "username": "sarah_wealth",
+      "email": "sarah@apex.com",
+      "password": "$2a$10$UzjppcgDMN5ogqlx4UGPUevKZstIw1FYULMzdJZ/Ehf.6YI3xC6dy",
+      "fullName": "Sarah Wealth",
+      "accountNumber": "9012345678",
+      "balance": 1450200.5,
+      "wealthBalance": 200000,
+      "createdAt": "2026-02-10T14:15:00.000Z"
+    },
+    {
+      "id": "user_1783035267337",
+      "username": "Joseph",
+      "email": "bakarejosepholuwafemi@gmail.com",
+      "password": "$2a$10$pPLlJBKxbzEG9Hq./dVi1OGHrpcgtQ7fhJbJSAfEacb30nBIpVFBK",
+      "fullName": "Bakare Joseph Oluwafemi",
+      "accountNumber": "9048135244",
+      "balance": 300,
+      "wealthBalance": 0,
+      "createdAt": "2026-07-02T23:34:27.337Z",
+      "loginAlerts": [
+        {
+          "date": "2026-07-05T14:07:53.147Z",
+          "ip": "::1",
+          "device": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36"
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx_alex_1",
+      "senderId": "system",
+      "senderName": "ApexPay Payout",
+      "receiverId": "user_alex",
+      "receiverName": "Alex Banks",
+      "amount": 300000,
+      "type": "deposit",
+      "category": "Salary",
+      "description": "Monthly Salary Credit",
+      "date": "2026-06-01T09:00:00.000Z"
+    },
+    {
+      "id": "tx_alex_2",
+      "senderId": "user_alex",
+      "senderName": "Alex Banks",
+      "receiverId": "system",
+      "receiverName": "MTN Airtime Topup",
+      "amount": 2000,
+      "type": "withdraw",
+      "category": "Airtime",
+      "description": "VTU Airtime purchase to 08031234567",
+      "date": "2026-06-15T18:45:00.000Z"
+    },
+    {
+      "id": "tx_alex_3",
+      "senderId": "user_alex",
+      "senderName": "Alex Banks",
+      "receiverId": "system",
+      "receiverName": "Ikeja Electricity",
+      "amount": 15000,
+      "type": "withdraw",
+      "category": "Electricity",
+      "description": "Prepaid Token for Meter 0429482103",
+      "date": "2026-06-25T11:30:00.000Z"
+    },
+    {
+      "id": "tx_alex_4",
+      "senderId": "user_alex",
+      "senderName": "Alex Banks",
+      "receiverId": "system",
+      "receiverName": "SportyBet Funding",
+      "amount": 5000,
+      "type": "withdraw",
+      "category": "Betting",
+      "description": "SportyBet Deposit Ref: SB987452",
+      "date": "2026-06-28T14:20:00.000Z"
+    },
+    {
+      "id": "tx_alex_5",
+      "senderId": "user_alex",
+      "senderName": "Alex Banks",
+      "receiverId": "user_sarah",
+      "receiverName": "Sarah Wealth",
+      "amount": 32500,
+      "type": "transfer",
+      "category": "Rent Share",
+      "description": "Shared Office Internet Bill split",
+      "date": "2026-07-01T10:00:00.000Z"
+    },
+    {
+      "id": "tx_sarah_1",
+      "senderId": "system",
+      "senderName": "Moniepoint Deposit",
+      "receiverId": "user_sarah",
+      "receiverName": "Sarah Wealth",
+      "amount": 1417700.5,
+      "type": "deposit",
+      "category": "Business Inflow",
+      "description": "POS Store Sales Payout",
+      "date": "2026-06-05T08:00:00.000Z"
+    },
+    {
+      "id": "tx_sarah_2",
+      "senderId": "user_alex",
+      "senderName": "Alex Banks",
+      "receiverId": "user_sarah",
+      "receiverName": "Sarah Wealth",
+      "amount": 32500,
+      "type": "transfer",
+      "category": "Rent Share",
+      "description": "Shared Office Internet Bill split",
+      "date": "2026-07-01T10:00:00.000Z"
+    },
+    {
+      "id": "tx_1783035267359",
+      "senderId": "system",
+      "senderName": "ApexPay Payout",
+      "receiverId": "user_1783035267337",
+      "receiverName": "Bakare Joseph Oluwafemi",
+      "amount": 1000,
+      "type": "deposit",
+      "category": "Rewards",
+      "description": "Welcome Sign-up Bonus Credit",
+      "date": "2026-07-02T23:34:27.359Z"
+    },
+    {
+      "id": "tx_1783035323286",
+      "senderId": "user_1783035267337",
+      "senderName": "Bakare Joseph Oluwafemi",
+      "receiverId": "vtu_provider",
+      "receiverName": "GLO VTU Airtime",
+      "amount": 500,
+      "type": "withdraw",
+      "category": "Airtime",
+      "description": "VTU Airtime Top-up to 09151028198",
+      "date": "2026-07-02T23:35:23.286Z"
+    },
+    {
+      "id": "tx_1783084726570",
+      "senderId": "user_1783035267337",
+      "senderName": "Bakare Joseph Oluwafemi",
+      "receiverId": "external_account",
+      "receiverName": "Babajide Nwachukwu (OPay)",
+      "amount": 200,
+      "type": "transfer",
+      "category": "Transfer",
+      "description": "Quick NUBAN pay to OPay",
+      "date": "2026-07-03T13:18:46.571Z"
+    }
+  ],
+  "cards": [
+    {
+      "id": "card_alex_1",
+      "userId": "user_alex",
+      "cardNumber": "5061 7812 9012 3456",
+      "cardHolder": "ALEX BANKS",
+      "expiry": "12/30",
+      "cvv": "382",
+      "type": "Verve Gold Card",
+      "color": "linear-gradient(135deg, #00b87b 0%, #005a3c 100%)",
+      "isFrozen": false,
+      "spendingLimit": 200000
+    },
+    {
+      "id": "card_sarah_1",
+      "userId": "user_sarah",
+      "cardNumber": "5061 8901 2345 6789",
+      "cardHolder": "SARAH WEALTH",
+      "expiry": "08/31",
+      "cvv": "109",
+      "type": "Verve Platinum Card",
+      "color": "linear-gradient(135deg, #13f1fc 0%, #0470dc 100%)",
+      "isFrozen": false,
+      "spendingLimit": 1000000
+    },
+    {
+      "id": "card_1783035267349",
+      "userId": "user_1783035267337",
+      "cardNumber": "5061 4370 9787 2770",
+      "cardHolder": "BAKARE JOSEPH OLUWAFEMI",
+      "expiry": "07/30",
+      "cvv": "395",
+      "type": "Verve Classic",
+      "color": "linear-gradient(135deg, #00b87b 0%, #005a3c 100%)",
+      "isFrozen": false,
+      "spendingLimit": 100000
+    }
+  ],
+  "goals": [
+    {
+      "id": "goal_alex_1",
+      "userId": "user_alex",
+      "name": "Business Capital Fund",
+      "targetAmount": 1000000,
+      "currentAmount": 150000,
+      "deadline": "2027-12-31"
+    },
+    {
+      "id": "goal_alex_2",
+      "userId": "user_alex",
+      "name": "Rent Savings",
+      "targetAmount": 500000,
+      "currentAmount": 240000,
+      "deadline": "2026-11-15"
+    },
+    {
+      "id": "goal_sarah_1",
+      "userId": "user_sarah",
+      "name": "Lekki Land Acquisition",
+      "targetAmount": 15000000,
+      "currentAmount": 5000000,
+      "deadline": "2028-06-30"
+    }
+  ],
+  "scheduledTransfers": [],
+  "paymentLinks": [],
+  "supportTickets": [],
+  "investments": []
+}

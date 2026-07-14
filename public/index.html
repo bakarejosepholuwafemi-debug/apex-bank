@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ApexPay - Nigerian Fintech Super-App</title>
+  
+  <!-- Modern Typography and Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ================= AUTH SECTION ================= -->
+  <div id="auth-container" class="auth-container">
+    <div class="auth-glow"></div>
+    <div class="auth-card">
+      <div class="auth-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-bolt brand-icon"></i>
+          <span>APEXPAY</span>
+        </div>
+        <h2 id="auth-title">The Future of Nigerian Banking</h2>
+        <p id="auth-subtitle">Log in to save, transfer, and pay bills in seconds.</p>
+        <div class="anti-phishing-login-badge">
+          <i class="fa-solid fa-shield-halved"></i> Phishing Shield: <strong class="glow-text">APEX_SECURE_TRUST</strong>
+        </div>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" class="auth-form active">
+        <div class="input-group">
+          <label for="login-username"><i class="fa-solid fa-user"></i> Username or Email</label>
+          <input type="text" id="login-username" placeholder="Enter username or email" required autocomplete="username">
+        </div>
+        <div class="input-group">
+          <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          <span>Sign In Securely</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <div class="fingerprint-login-box">
+          <button type="button" id="btn-biometric-mock" class="btn btn-secondary btn-block">
+            <i class="fa-solid fa-fingerprint"></i> Biometric Face ID / PIN Login
+          </button>
+        </div>
+        <p class="auth-toggle-text">Don't have an account? <span id="toggle-to-register">Register here</span></p>
+      </form>
+
+      <!-- Register Form -->
+      <form id="register-form" class="auth-form">
+        <div class="bonus-badge">
+          <i class="fa-solid fa-gift"></i>
+          <span>Includes a ₦1,000 Sign-Up Bonus!</span>
+        </div>
+        <div class="input-group">
+          <label for="reg-fullname"><i class="fa-solid fa-address-card"></i> Full Name</label>
+          <input type="text" id="reg-fullname" placeholder="e.g. John Doe" required>
+        </div>
+        <div class="input-group">
+          <label for="reg-username"><i class="fa-solid fa-user"></i> Username</label>
+          <input type="text" id="reg-username" placeholder="e.g. john_doe" required autocomplete="username">
+        </div>
+        <div class="input-group">
+          <label for="reg-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+          <input type="email" id="reg-email" placeholder="john@example.com" required autocomplete="email">
+        </div>
+        <div class="input-group">
+          <label for="reg-phone"><i class="fa-solid fa-phone"></i> Phone Number</label>
+          <input type="tel" id="reg-phone" placeholder="e.g. 09098765432" required>
+        </div>
+        <div class="input-group">
+          <label for="reg-pin"><i class="fa-solid fa-key"></i> 4-Digit PIN Security</label>
+          <input type="password" id="reg-pin" placeholder="••••" maxlength="4" pattern="\d{4}" required>
+        </div>
+        <div class="input-group">
+          <label for="reg-password"><i class="fa-solid fa-lock"></i> Password</label>
+          <input type="password" id="reg-password" placeholder="Create secure password" required autocomplete="new-password">
+        </div>
+        <div class="input-group">
+          <label for="reg-referral"><i class="fa-solid fa-users"></i> Referral Code (Optional)</label>
+          <input type="text" id="reg-referral" placeholder="Referrer username">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">
+          <span>Create Free Account</span>
+          <i class="fa-solid fa-user-plus"></i>
+        </button>
+        <p class="auth-toggle-text">Already have an account? <span id="toggle-to-login">Log in here</span></p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================= APP SECTION ================= -->
+  <div id="app-container" class="app-container hidden">
+    
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="brand-logo">
+          <i class="fa-solid fa-bolt brand-icon"></i>
+          <span>APEXPAY</span>
+        </div>
+        <button id="sidebar-close" class="sidebar-toggle-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <nav class="sidebar-menu">
+        <button class="nav-item active" data-tab="overview">
+          <i class="fa-solid fa-house"></i>
+          <span>Overview</span>
+        </button>
+        <button class="nav-item" data-tab="transfers">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Transfers</span>
+        </button>
+        <button class="nav-item" data-tab="payments">
+          <i class="fa-solid fa-wallet"></i>
+          <span>Payments & Bills</span>
+        </button>
+        <button class="nav-item" data-tab="cards">
+          <i class="fa-solid fa-credit-card"></i>
+          <span>Cards Manager</span>
+        </button>
+        <button class="nav-item" data-tab="goals">
+          <i class="fa-solid fa-piggy-bank"></i>
+          <span>Savings Vaults</span>
+        </button>
+        <button class="nav-item" data-tab="investments">
+          <i class="fa-solid fa-chart-line"></i>
+          <span>FX & Investments</span>
+        </button>
+        <button class="nav-item" data-tab="merchant">
+          <i class="fa-solid fa-store"></i>
+          <span>Business Hub</span>
+        </button>
+        <button class="nav-item" data-tab="rewards">
+          <i class="fa-solid fa-gift"></i>
+          <span>Cashback & Refer</span>
+        </button>
+        <button class="nav-item" data-tab="compliance">
+          <i class="fa-solid fa-shield-halved"></i>
+          <span>KYC & Limits</span>
+        </button>
+        <button class="nav-item" data-tab="finance">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Personal Finance</span>
+        </button>
+        <button class="nav-item" data-tab="ussd">
+          <i class="fa-solid fa-phone"></i>
+          <span>Offline USSD</span>
+        </button>
+        <button class="nav-item" data-tab="transactions">
+          <i class="fa-solid fa-receipt"></i>
+          <span>Statement</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="avatar">
+            <span id="user-avatar-initials">AB</span>
+          </div>
+          <div class="user-details">
+            <span class="user-name" id="profile-fullname">Alex Banks</span>
+            <span class="user-tag" id="profile-username">@alex_banks</span>
+          </div>
+        </div>
+        <button id="btn-logout" class="btn btn-logout">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN BODY -->
+    <main class="main-content">
+      
+      <!-- TOP NAV -->
+      <header class="top-nav">
+        <div class="top-nav-left">
+          <button id="sidebar-open" class="sidebar-toggle-btn"><i class="fa-solid fa-bars"></i></button>
+          <div class="greeting-box">
+            <h1>Hello, <span id="header-user-name">Alex</span></h1>
+            <p class="phishing-shield-banner">Security Key: <strong id="header-phrase-key">APEX_SECURE_TRUST</strong></p>
+          </div>
+        </div>
+        
+        <div class="top-nav-right">
+          <!-- Notification Bell Dropdown -->
+          <div class="notif-bell-container">
+            <button class="btn btn-secondary btn-icon-only" id="btn-toggle-notifications" title="Notifications">
+              <i class="fa-solid fa-bell"></i>
+              <span class="notif-badge-dot" id="notif-badge"></span>
+            </button>
+            <div id="notif-drawer" class="notif-drawer hidden">
+              <div class="notif-drawer-header">
+                <h4>Activity Logs & Alerts</h4>
+              </div>
+              <div id="notif-list" class="notif-list">
+                <!-- Loaded dynamically -->
+              </div>
+            </div>
+          </div>
+
+          <button class="btn btn-secondary btn-icon-only" id="btn-mock-deposit" title="Add Funds (Mock)">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Deposit</span>
+          </button>
+          
+          <button class="btn btn-secondary btn-icon-only" id="btn-toggle-chat" title="Apex AI Care">
+            <i class="fa-solid fa-robot"></i>
+            <span class="chat-badge-dot hidden"></span>
+          </button>
+        </div>
+      </header>
+
+      <!-- VIEW PANELS -->
+      <div class="view-panel-container">
+
+        <!-- 1. OVERVIEW PANEL -->
+        <section id="tab-overview" class="tab-content active">
+          
+          <!-- Unified stats cards -->
+          <div class="stats-grid dashboard-five-grid">
+            
+            <div class="stat-card balance-card">
+              <div class="stat-header">
+                <span>Checking Balance</span>
+                <i class="fa-solid fa-wallet"></i>
+              </div>
+              <div class="stat-value">₦<span id="dashboard-balance">250,500.75</span></div>
+              <div class="stat-footer">
+                <span class="acc-num">NUBAN: <strong id="dashboard-acc-num">9098765432</strong></span>
+                <button class="copy-btn" id="btn-copy-acc" title="Copy NUBAN"><i class="fa-regular fa-copy"></i></button>
+              </div>
+            </div>
+
+            <!-- OPay OWealth equivalent savings card -->
+            <div class="stat-card wealth-card">
+              <div class="stat-header">
+                <span>ApexWealth Savings</span>
+                <span class="wealth-rate-tag">15% P.A.</span>
+              </div>
+              <div class="stat-value">₦<span id="dashboard-wealth-balance">50,000.00</span></div>
+              <div class="stat-footer wealth-footer">
+                <span class="interest-earned-ticker">+₦<span id="wealth-interest-earned">0.000000</span></span>
+                <div class="wealth-quick-actions">
+                  <button class="wealth-act-btn" id="btn-wealth-deposit" title="Deposit into Wealth">Save</button>
+                  <button class="wealth-act-btn" id="btn-wealth-withdraw" title="Withdraw to Checking">Withdraw</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cashback rewards wallet card -->
+            <div class="stat-card rewards-card">
+              <div class="stat-header">
+                <span>Cashback Rewards</span>
+                <i class="fa-solid fa-gift icon-gold"></i>
+              </div>
+              <div class="stat-value">₦<span id="dashboard-cashback-balance">750.00</span></div>
+              <div class="stat-footer">
+                <button class="btn btn-primary btn-sm btn-block" id="btn-redeem-cashback" style="padding: 0.25rem 0.5rem; font-size: 0.75rem;">Redeem to Wallet</button>
+              </div>
+            </div>
+
+            <div class="stat-card income-card">
+              <div class="stat-header">
+                <span>Monthly Inflow</span>
+                <i class="fa-solid fa-arrow-down-long icon-green"></i>
+              </div>
+              <div class="stat-value">₦<span id="dashboard-income">300,000.00</span></div>
+              <div class="stat-footer">
+                <span class="trend-pos"><i class="fa-solid fa-arrow-trend-up"></i> Received this month</span>
+              </div>
+            </div>
+
+            <div class="stat-card expense-card">
+              <div class="stat-header">
+                <span>Monthly Outflow</span>
+                <i class="fa-solid fa-arrow-up-long icon-red"></i>
+              </div>
+              <div class="stat-value">₦<span id="dashboard-expense">54,500.00</span></div>
+              <div class="stat-footer">
+                <span class="trend-neg"><i class="fa-solid fa-arrow-trend-down"></i> Spent this month</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Linked Bank Accounts balances -->
+          <div class="linked-banks-row glass-card">
+            <div class="linked-header">
+              <h3>Linked External Bank Accounts</h3>
+              <button class="btn btn-secondary btn-sm" id="btn-link-bank-modal"><i class="fa-solid fa-plus"></i> Link External Account</button>
+            </div>
+            <div class="linked-banks-grid" id="linked-banks-container">
+              <div class="bank-pill">
+                <i class="fa-solid fa-building-columns"></i>
+                <div class="pill-details">
+                  <strong>GTBank (0123456789)</strong>
+                  <span>Bal: ₦45,000.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="charts-row">
+            <div class="chart-container glass-card main-chart">
+              <h3>Balance History</h3>
+              <div class="canvas-wrapper">
+                <canvas id="balanceChart"></canvas>
+              </div>
+            </div>
+            
+            <div class="chart-container glass-card side-chart">
+              <h3>Expense Distribution</h3>
+              <div class="canvas-wrapper">
+                <canvas id="categoryChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dashboard bottom split -->
+          <div class="split-row">
+            <!-- Recent Transactions -->
+            <div class="glass-card transactions-split">
+              <div class="split-header">
+                <h3>Recent Transactions</h3>
+                <button class="text-link" data-go-tab="transactions">View All</button>
+              </div>
+              <div class="recent-list-container" id="dashboard-transactions-list">
+                <!-- Loaded dynamically -->
+              </div>
+            </div>
+
+            <!-- Quick transfer shortcut card -->
+            <div class="glass-card widgets-split">
+              <h3>Fast Transfer</h3>
+              <form id="quick-transfer-form">
+                <div class="input-group">
+                  <select id="quick-bank" required style="margin-bottom: 0.5rem;">
+                    <option value="ApexPay" selected>ApexPay (Internal)</option>
+                    <option value="GTBank">GTBank</option>
+                    <option value="Access Bank">Access Bank</option>
+                    <option value="Kuda Bank">Kuda Bank</option>
+                    <option value="Moniepoint">Moniepoint</option>
+                    <option value="OPay">OPay</option>
+                    <option value="PalmPay">PalmPay</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <input type="text" id="quick-recipient" placeholder="10-digit NUBAN" maxlength="10" required>
+                </div>
+                <div class="input-group">
+                  <div class="input-prefix-wrapper">
+                    <span class="input-prefix">₦</span>
+                    <input type="number" id="quick-amount" placeholder="Amount" step="100" min="100" required>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Send Money</button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. TRANSFERS PANEL -->
+        <section id="tab-transfers" class="tab-content">
+          <div class="transfer-subtabs">
+            <button class="transfer-tab-btn active" data-transfer-mode="single">Single Transfer</button>
+            <button class="transfer-tab-btn" data-transfer-mode="bulk">Bulk Payments</button>
+            <button class="transfer-tab-btn" data-transfer-mode="scheduled">Scheduled Log</button>
+          </div>
+
+          <div class="split-row" id="transfer-single-container">
+            
+            <!-- Transfer Form -->
+            <div class="glass-card transfer-main-card">
+              <h3>Send Money to Any Bank</h3>
+              <p class="subtitle">Select the recipient bank, enter their NUBAN, and authorize immediate electronic settlement.</p>
+              
+              <form id="main-transfer-form">
+                <div class="transfer-row">
+                  <div class="input-group">
+                    <label for="transfer-bank">Destination Bank</label>
+                    <select id="transfer-bank" required>
+                      <option value="ApexPay" selected>ApexPay (Internal Transfer)</option>
+                      <option value="GTBank">Guaranty Trust Bank (GTBank)</option>
+                      <option value="Access Bank">Access Bank</option>
+                      <option value="Zenith Bank">Zenith Bank</option>
+                      <option value="United Bank for Africa">UBA</option>
+                      <option value="Kuda Bank">Kuda Bank</option>
+                      <option value="Moniepoint">Moniepoint Microfinance</option>
+                      <option value="OPay">OPay</option>
+                      <option value="PalmPay">PalmPay</option>
+                    </select>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="transfer-recipient">Account Number (10 digits)</label>
+                    <div class="search-verify-wrapper">
+                      <input type="text" id="transfer-recipient" placeholder="e.g. 9012345678" maxlength="10" required>
+                      <button type="button" id="btn-verify-recipient" class="btn btn-secondary">Check Name</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="recipient-verify-status" class="verify-status"></div>
+
+                <div class="transfer-row" style="margin-top: 1rem;">
+                  <div class="input-group">
+                    <label for="transfer-amount">Amount (₦)</label>
+                    <div class="input-prefix-wrapper">
+                      <span class="input-prefix">₦</span>
+                      <input type="number" id="transfer-amount" placeholder="0.00" step="50" min="100" required>
+                    </div>
+                    <div class="charges-disclosure">
+                      <i class="fa-solid fa-circle-info"></i> Transparent Fee: ₦<span id="transfer-calculated-fee">0.00</span> (First 3 transfers today free, then ₦10)
+                    </div>
+                  </div>
+
+                  <div class="input-group">
+                    <label for="transfer-category">Transaction Category</label>
+                    <select id="transfer-category">
+                      <option value="Transfer" selected>Transfer / Outflow</option>
+                      <option value="Family Support">Family Support</option>
+                      <option value="Business">Business Payment</option>
+                      <option value="Rent">Rent Payment</option>
+                      <option value="Food & Dining">Food & Dining</option>
+                      <option value="Utilities">Utilities</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="transfer-description">Transfer Note / Description</label>
+                  <input type="text" id="transfer-description" placeholder="Reference note" maxlength="100">
+                </div>
+
+                <!-- Scheduled & Recurring controls -->
+                <div class="recurring-controls-box">
+                  <label class="checkbox-wrapper">
+                    <input type="checkbox" id="transfer-is-recurring">
+                    <span>Schedule / Automate this transfer</span>
+                  </label>
+                  
+                  <div class="recurring-fields hidden" id="recurring-fields-panel">
+                    <div class="input-group">
+                      <label for="transfer-recurring-frequency">Interval Frequency</label>
+                      <select id="transfer-recurring-frequency">
+                        <option value="Daily">Daily Recurring</option>
+                        <option value="Weekly" selected>Weekly Recurring</option>
+                        <option value="Monthly">Monthly Recurring</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Confirm and Authorize Transfer</button>
+              </form>
+            </div>
+
+            <!-- Contacts & Limits Info -->
+            <div class="glass-card transfer-sidebar">
+              <h3>Beneficiary Quick-Select</h3>
+              <div class="contacts-grid" id="transfer-contacts-list">
+                <!-- Populated by JS -->
+              </div>
+
+              <div class="limits-info">
+                <h3>Inter-Bank Settlement Guidelines</h3>
+                <ul>
+                  <li><i class="fa-solid fa-circle-check"></i> Standard NIBSS electronic transfers settle instantly.</li>
+                  <li><i class="fa-solid fa-circle-check"></i> First 3 inter-bank transactions of the day are free.</li>
+                  <li><i class="fa-solid fa-shield-halved"></i> KYC Daily limits check: <strong id="transfer-limit-indicator">₦50,000</strong> max transfer.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bulk Transfers Container -->
+          <div class="glass-card hidden" id="transfer-bulk-container">
+            <h3>Bulk Money Transfer</h3>
+            <p class="subtitle">Distribute funds to multiple bank accounts at once. Perfect for payrolls or vendor splits.</p>
+            
+            <form id="bulk-transfer-form">
+              <div class="bulk-entries-list" id="bulk-entries-list">
+                <!-- Entry 1 -->
+                <div class="bulk-entry-row">
+                  <div class="input-group">
+                    <select class="bulk-bank" required>
+                      <option value="ApexPay">ApexPay (Internal)</option>
+                      <option value="GTBank">GTBank</option>
+                      <option value="Access Bank">Access Bank</option>
+                      <option value="Kuda Bank">Kuda Bank</option>
+                      <option value="Moniepoint">Moniepoint</option>
+                    </select>
+                  </div>
+                  <div class="input-group">
+                    <input type="text" class="bulk-recipient" placeholder="10-digit NUBAN" maxlength="10" required>
+                  </div>
+                  <div class="input-group">
+                    <input type="number" class="bulk-amount" placeholder="Amount (₦)" min="100" required>
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-icon-only btn-remove-bulk-row"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </div>
+              
+              <div class="bulk-action-row">
+                <button type="button" class="btn btn-secondary btn-sm" id="btn-add-bulk-row"><i class="fa-solid fa-plus"></i> Add Beneficiary</button>
+                <button type="submit" class="btn btn-primary">Process Bulk Settlement</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Scheduled log list -->
+          <div class="glass-card hidden" id="transfer-scheduled-container">
+            <h3>Scheduled Transfers Log</h3>
+            <p class="subtitle">A list of automated, recurring payments configured on your Apex account.</p>
+            <div class="ledger-table-container">
+              <table class="ledger-table">
+                <thead>
+                  <tr>
+                    <th>Frequency</th>
+                    <th>Beneficiary</th>
+                    <th>Reference</th>
+                    <th>Value</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="scheduled-transfers-table-body">
+                  <!-- Loaded dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. PAYMENTS & UTILITIES PANEL -->
+        <section id="tab-payments" class="tab-content">
+          <div class="payment-tabs-header">
+            <button class="pay-tab-btn active" data-pay-tab="airtime">Buy Airtime</button>
+            <button class="pay-tab-btn" data-pay-tab="data">Data Bundle</button>
+            <button class="pay-tab-btn" data-pay-tab="bills">Utility Bills</button>
+            <button class="pay-tab-btn" data-pay-tab="qr">QR Code Pay</button>
+          </div>
+
+          <!-- Airtime Panel -->
+          <div class="glass-card pay-panel active" id="pay-panel-airtime">
+            <h3>VTU Airtime Purchase</h3>
+            <p class="subtitle">Recharge your phone network or send airtime to family. Earn 3% cashback instantly!</p>
+            <form id="pay-form-airtime">
+              <div class="input-group">
+                <label for="airtime-provider">Provider Network</label>
+                <select id="airtime-provider" required>
+                  <option value="MTN">MTN Nigeria</option>
+                  <option value="Airtel">Airtel Nigeria</option>
+                  <option value="Glo">Glo Mobile</option>
+                  <option value="9mobile">9mobile</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="airtime-phone">Recipient Phone Number</label>
+                <div class="search-verify-wrapper">
+                  <input type="text" id="airtime-phone" placeholder="e.g. 08031234567" maxlength="11" required>
+                  <button type="button" class="btn btn-secondary" id="btn-airtime-contact-picker"><i class="fa-solid fa-address-book"></i> Contacts</button>
+                </div>
+              </div>
+              <div class="input-group">
+                <label for="airtime-amount">Recharge Amount (₦)</label>
+                <input type="number" id="airtime-amount" placeholder="₦0.00" min="100" max="50000" step="50" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Purchase Airtime</button>
+            </form>
+          </div>
+
+          <!-- Data Bundle Panel -->
+          <div class="glass-card pay-panel" id="pay-panel-data">
+            <h3>VTU Mobile Data Bundle</h3>
+            <p class="subtitle">Purchase affordable, fast data bundles directly. Earn 3% cashback rewards!</p>
+            <form id="pay-form-data">
+              <div class="input-group">
+                <label for="data-provider">Network Provider</label>
+                <select id="data-provider" required>
+                  <option value="MTN">MTN Nigeria</option>
+                  <option value="Airtel">Airtel Nigeria</option>
+                  <option value="Glo">Glo Mobile</option>
+                  <option value="9mobile">9mobile</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="data-phone">Phone Number</label>
+                <input type="text" id="data-phone" placeholder="e.g. 08031234567" maxlength="11" required>
+              </div>
+              <div class="input-group">
+                <label for="data-bundle">Data Package Option</label>
+                <select id="data-bundle" required>
+                  <!-- Loaded dynamically based on network -->
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Purchase Data Bundle</button>
+            </form>
+          </div>
+
+          <!-- Bills Panel -->
+          <div class="glass-card pay-panel" id="pay-panel-bills">
+            <h3>Electricity, TV, Internet & Water Bills</h3>
+            <form id="pay-form-bills">
+              <div class="input-group">
+                <label for="bills-type">Utility Bill Type</label>
+                <select id="bills-type" required>
+                  <option value="Electricity" selected>Prepaid Electricity (DisCo)</option>
+                  <option value="Cable TV">Cable TV subscription</option>
+                  <option value="Internet">Internet Service Providers</option>
+                  <option value="Water">Water boards</option>
+                  <option value="Education">Education Boards (WAEC/JAMB)</option>
+                  <option value="Betting">Betting Wallet funding</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="bills-biller">Biller Name</label>
+                <select id="bills-biller" required>
+                  <!-- Populated by utility switches -->
+                </select>
+              </div>
+              <div class="input-group">
+                <label for="bills-customer-id" id="lbl-bills-customer-id">Meter Number / Customer Smartcard</label>
+                <input type="text" id="bills-customer-id" placeholder="Enter meter/customer ID" required>
+              </div>
+              <div class="input-group">
+                <label for="bills-amount">Amount (₦)</label>
+                <input type="number" id="bills-amount" placeholder="₦0.00" min="200" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block">Authorize Bill Payment</button>
+            </form>
+          </div>
+
+          <!-- QR Code Panel -->
+          <div class="glass-card pay-panel" id="pay-panel-qr">
+            <div class="qr-payments-layout">
+              <!-- Receive Money with QR -->
+              <div class="qr-box-segment card-bg">
+                <h3>Receive Money with QR</h3>
+                <p>Present this QR code to another user to scan and transfer funds instantly.</p>
+                <div class="qr-graphic-container">
+                  <div class="qr-mock-image">
+                    <!-- Visual mock QR -->
+                    <i class="fa-solid fa-qrcode"></i>
+                  </div>
+                  <div class="qr-details-text">
+                    <h4 id="qr-display-name">ALEX BANKS</h4>
+                    <span id="qr-display-nuban">NUBAN: 9098765432</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Scan to Pay Simulator -->
+              <div class="qr-box-segment card-bg">
+                <h3>Scan to Pay Simulator</h3>
+                <p>Click below to simulate scanning a merchant QR code at checkout.</p>
+                <button class="btn btn-primary btn-block" id="btn-trigger-qr-scanner"><i class="fa-solid fa-camera"></i> Scan Merchant QR Code</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. CARDS MANAGER PANEL -->
+        <section id="tab-cards" class="tab-content">
+          <div class="cards-view-layout">
+            
+            <div class="card-display-container">
+              <div class="card-carousel-selector">
+                <button class="carousel-nav-btn" id="btn-prev-card"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="card-wrapper">
+                  <div class="virtual-card" id="apex-virtual-card">
+                    <div class="card-face card-front">
+                      <div class="card-front-header">
+                        <span class="card-brand-text" id="card-brand-disp">APEXPAY</span>
+                        <span class="card-chip-icon"><i class="fa-solid fa-microchip"></i></span>
+                      </div>
+                      
+                      <div class="card-number-box" id="card-display-number">•••• •••• •••• ••••</div>
+                      
+                      <div class="card-front-footer">
+                        <div class="card-holder-box">
+                          <span class="card-label">CARD HOLDER</span>
+                          <span class="card-value-text" id="card-display-name">ALEX BANKS</span>
+                        </div>
+                        
+                        <div class="card-expiry-box">
+                          <span class="card-label">EXPIRES</span>
+                          <span class="card-value-text" id="card-display-expiry">12/30</span>
+                        </div>
+
+                        <div class="card-cvv-box">
+                          <span class="card-label">CVV</span>
+                          <span class="card-value-text" id="card-display-cvv">•••</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="card-face card-back">
+                      <div class="card-magnetic-strip"></div>
+                      <div class="card-back-cvv-bar">
+                        <div class="cvv-signature">Authorized Signature</div>
+                        <div class="cvv-value" id="card-display-cvv-back">382</div>
+                      </div>
+                      <div class="card-back-text">
+                        Issued by ApexPay Digital Microfinance Bank. Valid internationally on card network.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button class="carousel-nav-btn" id="btn-next-card"><i class="fa-solid fa-chevron-right"></i></button>
+              </div>
+              <p class="card-tip-text"><i class="fa-solid fa-arrows-rotate"></i> Hover over or click card to flip. Active card is card <span id="card-carousel-index">1</span> of <span id="card-carousel-total">1</span></p>
+              
+              <!-- Card actions stack -->
+              <div class="card-actions-grid" style="margin-top: 1rem; display: flex; gap: 0.5rem; width: 100%;">
+                <button class="btn btn-primary btn-block btn-sm" id="btn-create-card-modal"><i class="fa-solid fa-plus"></i> Issue New Card</button>
+                <button class="btn btn-secondary btn-block btn-sm" id="btn-request-physical-modal"><i class="fa-solid fa-truck"></i> Request ATM Card</button>
+              </div>
+            </div>
+
+            <!-- Card Security Controls -->
+            <div class="card-controls-panel glass-card">
+              <h3>Security Manager</h3>
+              <p class="subtitle">Configure and lock cards instantly.</p>
+
+              <div class="control-row">
+                <div class="control-label-box">
+                  <h4>Freeze Card</h4>
+                  <p>Block POS, web checkout, and transfers immediately.</p>
+                </div>
+                <div class="control-input-box">
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="card-freeze-toggle">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+
+              <hr class="divider">
+
+              <div class="control-row limit-controller">
+                <div class="control-label-box">
+                  <h4>Daily Spending Cap</h4>
+                  <p>Modify maximum transaction value per day.</p>
+                </div>
+                <div class="limit-slider-container">
+                  <div class="limit-value-display">₦<span id="card-limit-display">200,000</span></div>
+                  <input type="range" id="card-limit-slider" min="5000" max="2000000" step="5000" value="200000">
+                </div>
+                <button id="btn-save-limit" class="btn btn-secondary btn-block">Update Card Cap</button>
+              </div>
+
+              <!-- NFC Tap-to-Pay Mock Simulator -->
+              <hr class="divider">
+              <div class="control-row nfc-simulator">
+                <div class="control-label-box">
+                  <h4>NFC Tap-to-Pay Checkout</h4>
+                  <p>Simulate tapping your virtual card at a mock POS cash terminal.</p>
+                </div>
+                <button class="btn btn-secondary btn-block" id="btn-trigger-nfc-mock"><i class="fa-solid fa-wifi"></i> NFC Tap Checkout</button>
+              </div>
+
+              <hr class="divider">
+
+              <div class="control-row skin-customizer">
+                <h4>Card Theme skins</h4>
+                <div class="skin-selector">
+                  <div class="skin-option active" data-gradient="linear-gradient(135deg, #00b87b 0%, #005a3c 100%)" style="background: linear-gradient(135deg, #00b87b 0%, #005a3c 100%);"></div>
+                  <div class="skin-option" data-gradient="linear-gradient(135deg, #1155aa 0%, #001155 100%)" style="background: linear-gradient(135deg, #1155aa 0%, #001155 100%);"></div>
+                  <div class="skin-option" data-gradient="linear-gradient(135deg, #ea4c15 0%, #7d1c00 100%)" style="background: linear-gradient(135deg, #ea4c15 0%, #7d1c00 100%);"></div>
+                  <div class="skin-option" data-gradient="linear-gradient(135deg, #764ba2 0%, #3a1c5c 100%)" style="background: linear-gradient(135deg, #764ba2 0%, #3a1c5c 100%);"></div>
+                  <div class="skin-option" data-gradient="linear-gradient(135deg, #ff5858 0%, #f09819 100%)" style="background: linear-gradient(135deg, #ff5858 0%, #f09819 100%);"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 5. SAVINGS VAULTS PANEL -->
+        <section id="tab-goals" class="tab-content">
+          <div class="goals-header-row">
+            <div>
+              <h3>Savings target Vaults</h3>
+              <p class="subtitle">Open dedicated vaults separated from checking to fund big projects like property or business setup.</p>
+            </div>
+            <button class="btn btn-primary" id="btn-open-create-goal"><i class="fa-solid fa-plus"></i> Open Target Vault</button>
+          </div>
+
+          <div class="goals-grid" id="goals-container">
+            <!-- Goals dynamic loading -->
+          </div>
+
+          <!-- Esusu Group / Round-up savings configurator -->
+          <div class="split-row" style="margin-top: 1.5rem;">
+            <div class="glass-card">
+              <h3>Group Savings (Ajo / Esusu)</h3>
+              <p class="subtitle">Create periodic group contributions. Members take turns collecting the bulk pool payout.</p>
+              <div class="esusu-mock-details">
+                <div class="esusu-row"><strong>Active Group:</strong> Lekki Developers Ajo</div>
+                <div class="esusu-row"><strong>Cycle Contribution:</strong> ₦100,000 Monthly</div>
+                <div class="esusu-row"><strong>Payout Pool Size:</strong> ₦1,200,000</div>
+                <div class="esusu-row"><strong>Your Turn:</strong> Month 4 (October 2026)</div>
+              </div>
+              <button class="btn btn-secondary btn-block btn-sm" style="margin-top: 1rem;">Join Group Ajo Pool</button>
+            </div>
+
+            <div class="glass-card">
+              <h3>Round-up micro-savings</h3>
+              <p class="subtitle">Automatically round up card checkouts to the nearest ₦100 and transfer the difference into your savings vault.</p>
+              <div class="control-row">
+                <div class="control-label-box">
+                  <h4>Activate Card Round-ups</h4>
+                  <p>Saves microchange on card purchases.</p>
+                </div>
+                <div class="control-input-box">
+                  <label class="toggle-switch">
+                    <input type="checkbox" id="round-up-savings-toggle">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. FX & INVESTMENTS PANEL -->
+        <section id="tab-investments" class="tab-content">
+          <div class="split-row">
+            <!-- Swap Wallet converter -->
+            <div class="glass-card">
+              <h3>Multi-currency Wallets</h3>
+              <p class="subtitle">Convert savings between local Naira and major global foreign currencies instantly.</p>
+              
+              <div class="currency-pills-row" style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+                <div class="currency-pill active">
+                  <strong>NGN</strong>
+                  <span id="fx-balance-ngn">₦250,500</span>
+                </div>
+                <div class="currency-pill">
+                  <strong>USD</strong>
+                  <span id="fx-balance-usd">$100.00</span>
+                </div>
+                <div class="currency-pill">
+                  <strong>GBP</strong>
+                  <span id="fx-balance-gbp">£0.00</span>
+                </div>
+                <div class="currency-pill">
+                  <strong>EUR</strong>
+                  <span id="fx-balance-eur">€0.00</span>
+                </div>
+              </div>
+
+              <form id="currency-swap-form">
+                <div class="transfer-row">
+                  <div class="input-group">
+                    <label for="swap-from">From Currency</label>
+                    <select id="swap-from" required>
+                      <option value="NGN">Naira (NGN)</option>
+                      <option value="USD">Dollars (USD)</option>
+                      <option value="GBP">Pounds (GBP)</option>
+                      <option value="EUR">Euros (EUR)</option>
+                    </select>
+                  </div>
+                  <div class="input-group">
+                    <label for="swap-to">To Currency</label>
+                    <select id="swap-to" required>
+                      <option value="USD" selected>Dollars (USD)</option>
+                      <option value="NGN">Naira (NGN)</option>
+                      <option value="GBP">Pounds (GBP)</option>
+                      <option value="EUR">Euros (EUR)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <label for="swap-amount">Amount to Convert</label>
+                  <input type="number" id="swap-amount" placeholder="0.00" min="1" step="any" required>
+                  <div class="fx-rate-indicator" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">
+                    Conversion Rate: <span id="fx-live-rate">1 USD = ₦1,500.00</span>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Confirm Exchange Swap</button>
+              </form>
+            </div>
+
+            <!-- Treasury Bills & Stocks Market -->
+            <div class="glass-card">
+              <h3>Wealth Investment Center</h3>
+              <p class="subtitle">Purchase mock shares or government backed treasury bills directly in app.</p>
+              
+              <div class="investment-list">
+                <div class="investment-item">
+                  <div class="inv-meta">
+                    <strong>Federal Govt 180-Day T-Bill</strong>
+                    <span>Yield: 17.5% P.A. (Compounding)</span>
+                  </div>
+                  <button class="btn btn-secondary btn-sm btn-buy-investment" data-name="Govt 180-Day T-Bill" data-rate="17.5%" data-price="50000">Invest</button>
+                </div>
+                
+                <div class="investment-item">
+                  <div class="inv-meta">
+                    <strong>ApexPay Tech Mutual Fund</strong>
+                    <span>Target Growth: 24% P.A.</span>
+                  </div>
+                  <button class="btn btn-secondary btn-sm btn-buy-investment" data-name="ApexPay Tech Mutual Fund" data-rate="24%" data-price="10000">Invest</button>
+                </div>
+              </div>
+
+              <div class="active-investments-box" style="margin-top: 1.5rem;">
+                <h4>Your Active Investments</h4>
+                <div class="ledger-table-container" style="max-height: 120px;">
+                  <table class="ledger-table">
+                    <tbody id="investments-table-body">
+                      <!-- Loaded dynamically -->
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. BUSINESS HUB PANEL -->
+        <section id="tab-merchant" class="tab-content">
+          <div class="merchant-mode-header glass-card">
+            <div class="merchant-desc">
+              <h3>ApexPay Business Hub</h3>
+              <p class="subtitle">Toggle business mode to receive POS settlements, track store sales, and generate client billing links.</p>
+            </div>
+            <button class="btn btn-primary" id="btn-toggle-merchant-mode"><i class="fa-solid fa-repeat"></i> Switch to Business Account</button>
+          </div>
+
+          <!-- Business hub content views -->
+          <div class="business-hub-panels hidden" id="business-hub-panel">
+            <div class="split-row">
+              <div class="glass-card">
+                <h3>Store Sales tracking</h3>
+                <div class="canvas-wrapper">
+                  <canvas id="businessSalesChart"></canvas>
+                </div>
+              </div>
+
+              <!-- Merchant links generator -->
+              <div class="glass-card">
+                <h3>Custom Payment Links</h3>
+                <p class="subtitle">Generate custom links for your customers to pay invoices instantly.</p>
+                <form id="merchant-paylink-form">
+                  <div class="input-group">
+                    <label for="paylink-title">Product / Invoice Title</label>
+                    <input type="text" id="paylink-title" placeholder="e.g. Graphic design billing" required>
+                  </div>
+                  <div class="input-group">
+                    <label for="paylink-amount">Billing Value (₦)</label>
+                    <input type="number" id="paylink-amount" placeholder="₦0.00" min="100" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block">Generate Link</button>
+                </form>
+                
+                <div class="payment-links-list" style="margin-top: 1rem;">
+                  <h4>Your Active Payment Links</h4>
+                  <ul id="paylinks-container" class="bullet-list">
+                    <!-- Populated dynamically -->
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <!-- POS terminal ordering -->
+            <div class="glass-card" style="margin-top: 1.5rem;">
+              <div class="pos-request-layout">
+                <div class="pos-meta">
+                  <h3>Get a Physical POS Terminal</h3>
+                  <p>Order Moniepoint/ApexPay styled mobile POS terminals. Low fee rates of 0.5% cap at ₦100 per withdrawal.</p>
+                </div>
+                <form id="merchant-pos-form" class="pos-form-row">
+                  <div class="input-group">
+                    <select id="pos-type-select" required>
+                      <option value="ApexPay Smart POS">ApexPay Smart POS (Android)</option>
+                      <option value="ApexPay Mini POS">ApexPay Analog POS</option>
+                    </select>
+                  </div>
+                  <div class="input-group">
+                    <input type="text" id="pos-business-name" placeholder="Enter Business Name" required>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit Terminal Order</button>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="glass-card" id="business-disabled-prompt" style="text-align: center; padding: 4rem 2rem;">
+            <i class="fa-solid fa-store" style="font-size: 4rem; color: var(--text-muted); margin-bottom: 1.5rem;"></i>
+            <h3>Switch to Merchant Account</h3>
+            <p style="max-width: 500px; margin: 0.5rem auto 1.5rem auto; color: var(--text-secondary);">Unlock POS terminals ordering, client billing links, sales tracking charts, and payment invoice managers.</p>
+            <button class="btn btn-primary" id="btn-activate-merchant-mode">Activate Business Account Mode</button>
+          </div>
+        </section>
+
+        <!-- 8. REWARDS & REFERRALS PANEL -->
+        <section id="tab-rewards" class="tab-content">
+          <div class="split-row">
+            
+            <div class="glass-card">
+              <h3>Daily Check-in Reward</h3>
+              <p class="subtitle">Claim free ₦50 reward credits once every 24 hours just by keeping your app active!</p>
+              <div class="daily-reward-claim-box" style="text-align: center; padding: 2rem 1rem;">
+                <i class="fa-solid fa-calendar-check" style="font-size: 3rem; color: var(--accent-secondary); margin-bottom: 1rem;"></i>
+                <button class="btn btn-primary btn-block" id="btn-claim-daily-rewards">Claim Daily Attendance (₦50.00)</button>
+              </div>
+            </div>
+
+            <div class="glass-card">
+              <h3>Referral Program</h3>
+              <p class="subtitle">Invite your friends to ApexPay. Earn ₦500 bonus immediately after they sign up and verify BVN!</p>
+              
+              <div class="referral-code-badge" style="background: hsla(225, 20%, 25%, 0.4); padding: 1rem; border-radius: 12px; text-align: center; margin-bottom: 1rem;">
+                <span>YOUR REFERRAL CODE</span>
+                <h2 id="rewards-referral-code" style="color: var(--accent-secondary); font-family: var(--font-display); font-size: 2rem; margin-top: 0.5rem;">ALEX_BANKS</h2>
+              </div>
+
+              <div class="referral-stats">
+                <div class="ref-stat-row"><strong>Referred Signups:</strong> <span id="ref-stat-signups">0</span></div>
+                <div class="ref-stat-row"><strong>Total Referral Payouts:</strong> ₦<span id="ref-stat-bonuses">0.00</span></div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="glass-card" style="margin-top: 1.5rem;">
+            <h3>Coupon Center</h3>
+            <p class="subtitle">Redeem discount coupons for low utility transaction billing charges.</p>
+            <div class="coupons-grid">
+              <div class="coupon-card">
+                <div class="c-body">
+                  <h4>₦100 Cashback</h4>
+                  <span>Electricity Bill coupon</span>
+                </div>
+                <span class="coupon-tag">Active</span>
+              </div>
+              <div class="coupon-card">
+                <div class="c-body">
+                  <h4>Free Airtime</h4>
+                  <span>3% extra airtime boost</span>
+                </div>
+                <span class="coupon-tag">Active</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. KYC LEVEL & TRANSACTION LIMITS -->
+        <section id="tab-compliance" class="tab-content">
+          <div class="split-row">
+            
+            <div class="glass-card">
+              <h3>KYC Level & Limits</h3>
+              <p class="subtitle">Complete your verification tiers to unlock larger daily caps and unlock global FX swaps.</p>
+              
+              <div class="kyc-gauge-container">
+                <div class="kyc-level-title">Active Security Tier: <strong id="kyc-tier-display">Tier 1</strong></div>
+                <div class="kyc-gauge-bar">
+                  <div class="kyc-gauge-fill" id="kyc-gauge-fill" style="width: 33%;"></div>
+                </div>
+              </div>
+
+              <table class="ledger-table" style="margin-top: 1.5rem;">
+                <thead>
+                  <tr>
+                    <th>Verification Level</th>
+                    <th>Daily Transfer Limit</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Tier 1</strong> (Phone No)</td>
+                    <td>₦50,000.00</td>
+                    <td class="text-right" id="status-tier-1">Active</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tier 2</strong> (BVN / NIN)</td>
+                    <td>₦500,000.00</td>
+                    <td class="text-right" id="status-tier-2">Locked</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Tier 3</strong> (Selfie & Documents)</td>
+                    <td>₦5,000,000.00</td>
+                    <td class="text-right" id="status-tier-3">Locked</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- KYC Document/Selfie Uploader Form -->
+            <div class="glass-card">
+              <h3>Fast KYC Verification</h3>
+              <p class="subtitle">Input your details or upload documents to instantly upgrade your account limit.</p>
+              
+              <form id="compliance-upgrade-form">
+                <!-- Level 2 form: BVN/NIN -->
+                <div class="kyc-form-section" id="kyc-form-l2">
+                  <div class="input-group">
+                    <label for="compliance-bvn-nin-select">Upgrade ID Method</label>
+                    <select id="compliance-bvn-nin-select">
+                      <option value="bvn">Bank Verification Number (BVN)</option>
+                      <option value="nin">National Identification Number (NIN)</option>
+                    </select>
+                  </div>
+                  <div class="input-group">
+                    <label for="compliance-id-number">ID Number (11 digits)</label>
+                    <input type="text" id="compliance-id-number" placeholder="Enter 11-digit verified ID" maxlength="11">
+                  </div>
+                  <button type="button" class="btn btn-secondary btn-block" id="btn-submit-kyc-l2">Submit BVN / NIN ID</button>
+                </div>
+
+                <hr class="divider">
+
+                <!-- Level 3 form: Selfie & Documents -->
+                <div class="kyc-form-section" id="kyc-form-l3">
+                  <div class="input-group">
+                    <label>Mock Selfie Verification Capture</label>
+                    <div class="selfie-mock-box" id="selfie-mock-box">
+                      <i class="fa-solid fa-camera" id="selfie-cam-icon"></i>
+                      <img id="selfie-preview" class="hidden" src="" alt="Selfie Preview">
+                      <span id="selfie-hint-text">Simulate Selfie Camera Capture</span>
+                    </div>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btn-capture-selfie">Take Selfie Mock</button>
+                  </div>
+                  <div class="input-group">
+                    <label for="compliance-doc-select">Upload Legal ID Documents</label>
+                    <select id="compliance-doc-select">
+                      <option value="passport">International Passport</option>
+                      <option value="drivers">Driver License</option>
+                      <option value="voter">Permanent Voter Card (PVC)</option>
+                    </select>
+                  </div>
+                  <div class="input-group">
+                    <input type="file" id="compliance-file-input" style="display:none;">
+                    <button type="button" class="btn btn-secondary btn-block" id="btn-trigger-file-upload"><i class="fa-solid fa-upload"></i> Upload ID Card Image</button>
+                    <span id="file-uploaded-hint" style="font-size: 0.8rem; color: var(--accent-primary); margin-top: 0.25rem;" class="hidden">✓ id_card_image.png uploaded</span>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-block" id="btn-submit-kyc-l3">Upgrade to KYC Tier 3</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- 10. PERSONAL FINANCE & BUDGETS -->
+        <section id="tab-finance" class="tab-content">
+          <div class="split-row">
+            
+            <div class="glass-card">
+              <h3>Monthly Expense Budgets</h3>
+              <p class="subtitle">Set limits on transaction categories and track spending metrics to stay financially disciplined.</p>
+              
+              <div class="budgets-slider-list" id="budgets-slider-list">
+                <!-- Budgets rendering dynamically -->
+              </div>
+            </div>
+
+            <!-- Financial insights and report card -->
+            <div class="glass-card">
+              <h3>Personal Finance Insights</h3>
+              <p class="subtitle">AI generated spending analysis on your checking cash flow transactions.</p>
+              
+              <div class="insight-pills-list">
+                <div class="insight-pill-item">
+                  <i class="fa-solid fa-brain"></i>
+                  <div class="pill-msg">
+                    <strong>AI Recommendation</strong>
+                    <span>Your Utility bill expenditure decreased by 12% compared to last month. Great job!</span>
+                  </div>
+                </div>
+                
+                <div class="insight-pill-item warning-pill">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  <div class="pill-msg">
+                    <strong>Budget Warning</strong>
+                    <span>You are at 85% of your Dining out category budget allocation.</span>
+                  </div>
+                </div>
+              </div>
+
+              <button class="btn btn-primary btn-block" style="margin-top: 2rem;" id="btn-download-finance-report"><i class="fa-solid fa-file-pdf"></i> Download PDF Monthly Statement Report</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 11. OFFLINE USSD DIAL SIMULATOR -->
+        <section id="tab-ussd" class="tab-content">
+          <div class="ussd-emulator-layout">
+            
+            <!-- Mobile Phone visual outline -->
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <div class="phone-screen-header">
+                  <span>9:41</span>
+                  <div class="phone-icons">
+                    <i class="fa-solid fa-signal"></i>
+                    <i class="fa-solid fa-wifi"></i>
+                    <i class="fa-solid fa-battery-full"></i>
+                  </div>
+                </div>
+
+                <div class="phone-screen-body">
+                  <!-- Dialed USSD dialog box overlay -->
+                  <div class="ussd-alert-overlay hidden" id="ussd-screen-dialog">
+                    <div class="ussd-dialog-card">
+                      <p id="ussd-dialog-text">Sending request...</p>
+                      <input type="text" id="ussd-dialog-input" class="hidden">
+                      <div class="ussd-dialog-actions">
+                        <button type="button" id="btn-ussd-dialog-cancel">Cancel</button>
+                        <button type="button" id="btn-ussd-dialog-send" class="hidden">Send</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Idle Dial pad -->
+                  <div class="phone-dialer-app" id="ussd-dialer-app">
+                    <div class="dialer-screen">
+                      <input type="text" id="dialer-input-number" placeholder="" readonly>
+                    </div>
+                    <div class="dialer-grid">
+                      <button class="dial-btn" data-key="1">1</button>
+                      <button class="dial-btn" data-key="2">2<span>A B C</span></button>
+                      <button class="dial-btn" data-key="3">3<span>D E F</span></button>
+                      
+                      <button class="dial-btn" data-key="4">4<span>G H I</span></button>
+                      <button class="dial-btn" data-key="5">5<span>J K L</span></button>
+                      <button class="dial-btn" data-key="6">6<span>M N O</span></button>
+                      
+                      <button class="dial-btn" data-key="7">7<span>P Q R S</span></button>
+                      <button class="dial-btn" data-key="8">8<span>T U V</span></button>
+                      <button class="dial-btn" data-key="9">9<span>W X Y Z</span></button>
+                      
+                      <button class="dial-btn" data-key="*">*</button>
+                      <button class="dial-btn" data-key="0">0<span>+</span></button>
+                      <button class="dial-btn" data-key="#">#</button>
+                    </div>
+                    
+                    <div class="dialer-footer">
+                      <button class="dial-btn-call" id="btn-ussd-call"><i class="fa-solid fa-phone"></i></button>
+                      <button class="dial-btn-backspace" id="btn-ussd-backspace"><i class="fa-solid fa-delete-left"></i></button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Explanation metadata info card -->
+            <div class="glass-card ussd-explainer">
+              <h3>Offline Dial Simulator (*902#)</h3>
+              <p class="subtitle">Experience banking without an active internet connection. Simulated USSD codes translate network requests into core ledger actions.</p>
+              <ul>
+                <li><i class="fa-solid fa-arrow-right"></i> Dial <strong>*902#</strong> and click call to load the main menu.</li>
+                <li><i class="fa-solid fa-arrow-right"></i> Send number replies to check balance or make transfers offline.</li>
+                <li><i class="fa-solid fa-arrow-right"></i> Transfer offline by dialing: <strong>*902*2*amount*nuban#</strong></li>
+              </ul>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- 12. STATEMENTS & LEDGER PANEL -->
+        <section id="tab-transactions" class="tab-content">
+          <div class="glass-card transactions-search-card">
+            <div class="search-filters-header">
+              <h3>Account Statement & Ledger</h3>
+              <button id="btn-export-csv" class="btn btn-secondary"><i class="fa-solid fa-file-csv"></i> Export Statement</button>
+            </div>
+
+            <!-- Filtering tools -->
+            <div class="filter-controls-row">
+              <div class="search-bar-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="tx-search-input" placeholder="Search references, description...">
+              </div>
+
+              <div class="select-filters-wrapper">
+                <select id="tx-filter-type">
+                  <option value="" selected>All Operations</option>
+                  <option value="income">Inflow (Credits)</option>
+                  <option value="expense">Outflow (Debits)</option>
+                </select>
+
+                <select id="tx-filter-category">
+                  <option value="" selected>All Categories</option>
+                  <option value="Salary">Salary</option>
+                  <option value="Airtime">Airtime VTU</option>
+                  <option value="Electricity">Electricity</option>
+                  <option value="Cable TV">Cable TV</option>
+                  <option value="Betting">Betting wallet</option>
+                  <option value="Savings">Savings Vault</option>
+                  <option value="Transfer">Inter-Bank transfers</option>
+                  <option value="Rewards">Spin Payouts</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Ledger Table -->
+            <div class="ledger-table-container">
+              <table class="ledger-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Recipient / Beneficiary</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th class="text-right">Value</th>
+                  </tr>
+                </thead>
+                <tbody id="transactions-table-body">
+                  <!-- Dynamic rows -->
+                </tbody>
+              </table>
+              <div id="tx-empty-state" class="empty-state-box hidden">
+                <i class="fa-solid fa-ghost"></i>
+                <p>No matching ledger records located.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Customer Support FAQ & Support ticket creation -->
+          <div class="split-row" style="margin-top: 1.5rem;">
+            <!-- Ticket creation -->
+            <div class="glass-card">
+              <h3>Helpdesk Support Tickets</h3>
+              <p class="subtitle">Encountering ledger delays? Submit a support ticket to our engineering desk.</p>
+              <form id="support-ticket-form">
+                <div class="input-group">
+                  <label for="ticket-title">Issue Title</label>
+                  <input type="text" id="ticket-title" placeholder="e.g. Failed transaction refund check" required>
+                </div>
+                <div class="input-group">
+                  <label for="ticket-desc">Detailed Description</label>
+                  <input type="text" id="ticket-desc" placeholder="Specify date, amounts, and transaction ID details" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Log Support Ticket</button>
+              </form>
+              
+              <div class="active-tickets-box" style="margin-top: 1.25rem;">
+                <h4>Submitted Support Tickets</h4>
+                <ul id="tickets-container" class="bullet-list">
+                  <!-- Loaded dynamically -->
+                </ul>
+              </div>
+            </div>
+
+            <!-- FAQ accordion -->
+            <div class="glass-card faq-section">
+              <h3>Frequently Asked Questions</h3>
+              <div class="faq-accordion">
+                <div class="faq-item">
+                  <div class="faq-question">How does ApexWealth P.A. rate calculate? <i class="fa-solid fa-chevron-down"></i></div>
+                  <div class="faq-answer">Interest compounds daily in real-time at a rate of 15% per annum based on funds held inside the OWealth vault.</div>
+                </div>
+                <div class="faq-item">
+                  <div class="faq-question">What are daily transaction limits per Tier? <i class="fa-solid fa-chevron-down"></i></div>
+                  <div class="faq-answer">Tier 1 limits transfers to ₦50,000 daily. Verify your BVN/NIN for Tier 2 (₦500,000 limit) or submit ID scans for Tier 3 (₦5,000,000 limit).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+
+    <!-- AI SUPPORT BOT FLOATING SIDEBAR -->
+    <div id="chat-drawer" class="chat-drawer">
+      <div class="chat-header">
+        <div class="chat-logo">
+          <i class="fa-solid fa-robot"></i>
+          <div>
+            <h4>ApexPay AI Care</h4>
+            <small>Active Support Bot</small>
+          </div>
+        </div>
+        <button id="btn-close-chat" class="chat-close-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="chat-messages-log" id="chat-messages-container">
+        <div class="chat-message bot">
+          <div class="chat-bubble">
+            Hello! I am your ApexPay Customer Care Assistant. Ask me anything about balances, OWealth daily interest yield, airtime, or transfers. Type **help** to see all commands!
+          </div>
+        </div>
+      </div>
+
+      <div class="chat-chips-row">
+        <button class="chat-chip-btn" data-query="What is my balance?">Check Balance</button>
+        <button class="chat-chip-btn" data-query="How does ApexWealth interest work?">ApexWealth Interest</button>
+        <button class="chat-chip-btn" data-query="Show my recent transactions">Recent Tx</button>
+        <button class="chat-chip-btn" data-query="How do I transfer?">Transfer Info</button>
+      </div>
+
+      <form id="chat-form" class="chat-input-row">
+        <button type="button" class="chat-voice-btn" id="btn-chat-voice" title="Voice Banking command"><i class="fa-solid fa-microphone"></i></button>
+        <input type="text" id="chat-input" placeholder="Ask ApexPay AI..." required autocomplete="off">
+        <button type="submit" class="chat-send-btn"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- ================= MODALS ================= -->
+
+  <!-- 1. GOAL CREATION MODAL -->
+  <div id="goal-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Open Savings Target Vault</h3>
+        <button class="btn-close-modal" id="btn-close-goal-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="create-goal-form">
+        <div class="input-group">
+          <label for="goal-name">Vault Name</label>
+          <input type="text" id="goal-name" placeholder="e.g. Business Capital, Car Vault" required>
+        </div>
+        <div class="input-group">
+          <label for="goal-target">Target Savings Goal Amount (₦)</label>
+          <input type="number" id="goal-target" min="500" placeholder="e.g. 500000" required>
+        </div>
+        <div class="input-group">
+          <label for="goal-deadline">Completion Deadline</label>
+          <input type="date" id="goal-deadline" required>
+        </div>
+        <div class="recurring-controls-box" style="margin-bottom: 1rem;">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" id="goal-is-autosave">
+            <span>Activate automated recurring saving (Ajo)</span>
+          </label>
+          <div class="recurring-fields-goal hidden" id="recurring-fields-goal">
+            <div class="input-group">
+              <label for="goal-autosave-amount">Auto-save Amount (₦)</label>
+              <input type="number" id="goal-autosave-amount" placeholder="₦5,000">
+            </div>
+            <div class="input-group">
+              <label for="goal-autosave-frequency">Saving Frequency</label>
+              <select id="goal-autosave-frequency">
+                <option value="daily">Daily</option>
+                <option value="weekly" selected>Weekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Initialize Goal Vault</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 2. GOAL TRANSACTION MODAL (DEPOSIT/WITHDRAW) -->
+  <div id="goal-tx-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="goal-tx-title">Manage Savings Vault Funds</h3>
+        <button class="btn-close-modal" id="btn-close-goal-tx-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="goal-transaction-form">
+        <input type="hidden" id="goal-tx-id">
+        <input type="hidden" id="goal-tx-action-type">
+        <p id="goal-tx-description" class="subtitle">Allocate funds into this specific vault target.</p>
+        <div class="input-group">
+          <label for="goal-tx-amount">Amount (₦)</label>
+          <input type="number" id="goal-tx-amount" min="10" step="10" placeholder="₦0.00" required>
+          <div class="modal-balance-hint">Available: ₦<span id="goal-tx-available-hint">0.00</span></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="btn-goal-tx-submit">Authorize Fund Movement</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3. WEALTH VAULT DEPOSIT/WITHDRAW MODAL -->
+  <div id="wealth-tx-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="wealth-tx-title">ApexWealth Funds Manager</h3>
+        <button class="btn-close-modal" id="btn-close-wealth-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="wealth-transaction-form">
+        <input type="hidden" id="wealth-tx-action-type" value="deposit"> <!-- deposit or withdraw -->
+        <p id="wealth-tx-description" class="subtitle">Accumulate compounding interest daily in our 15% P.A. wealth engine.</p>
+        <div class="input-group">
+          <label for="wealth-tx-amount">Amount (₦)</label>
+          <input type="number" id="wealth-tx-amount" min="100" step="10" placeholder="₦0.00" required>
+          <div class="modal-balance-hint">Available limit: ₦<span id="wealth-tx-available-hint">0.00</span></div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="btn-wealth-tx-submit">Confirm Transaction</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. MOCK CARD DEPOSIT MODAL -->
+  <div id="card-deposit-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Fund checking account</h3>
+        <button class="btn-close-modal" id="btn-close-deposit-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="mock-deposit-form">
+        <p class="subtitle">Refill your ApexPay wallet instantly by simulating standard debit card billing.</p>
+        <div class="input-group">
+          <label for="deposit-amount">Credit Amount (₦)</label>
+          <input type="number" id="deposit-amount" min="100" max="5000000" placeholder="₦5,000.00" required>
+        </div>
+        <div class="input-group">
+          <label for="deposit-card-number">Card Number</label>
+          <input type="text" id="deposit-card-number" placeholder="5061 9845 2841 0932" required value="5061 9845 2841 0932">
+        </div>
+        <div class="transfer-row">
+          <div class="input-group">
+            <label for="deposit-expiry">Expiry</label>
+            <input type="text" id="deposit-expiry" placeholder="12/29" required value="12/29">
+          </div>
+          <div class="input-group">
+            <label for="deposit-cvv">CVV</label>
+            <input type="text" id="deposit-cvv" placeholder="482" required value="482">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Authorize Deposit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. CREATE VIRTUAL CARD MODAL -->
+  <div id="create-card-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Issue New Virtual Card</h3>
+        <button class="btn-close-modal" id="btn-close-create-card-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="create-card-form">
+        <div class="input-group">
+          <label for="card-brand-select">Card Network Brand</label>
+          <select id="card-brand-select" required>
+            <option value="Verve">Verve Card</option>
+            <option value="Visa">Visa Card</option>
+            <option value="Mastercard">Mastercard Card</option>
+          </select>
+        </div>
+        <div class="recurring-controls-box" style="margin-bottom: 1.5rem;">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" id="card-is-disposable">
+            <span>Single-use Disposable Card (Destructs on checkout)</span>
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Generate Card</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 6. REQUEST PHYSICAL CARD MODAL -->
+  <div id="request-physical-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Request Physical ATM Card Delivery</h3>
+        <button class="btn-close-modal" id="btn-close-request-physical-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="request-physical-form">
+        <div class="input-group">
+          <label for="physical-card-brand">Card Network</label>
+          <select id="physical-card-brand" required>
+            <option value="Verve">Verve Gold Card</option>
+            <option value="Visa">Visa Premium Platinum</option>
+            <option value="Mastercard">Mastercard Executive</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="physical-card-address">Home Delivery Address</label>
+          <input type="text" id="physical-card-address" placeholder="e.g. 15 Marina St, Lagos Island" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit Physical Card Order</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 7. LINK EXTERNAL BANK ACCOUNT MODAL -->
+  <div id="link-bank-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Link External Bank Account</h3>
+        <button class="btn-close-modal" id="btn-close-link-bank-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="link-bank-form">
+        <div class="input-group">
+          <label for="link-bank-select">Select Bank Name</label>
+          <select id="link-bank-select" required>
+            <option value="GTBank">GTBank</option>
+            <option value="Access Bank">Access Bank</option>
+            <option value="Zenith Bank">Zenith Bank</option>
+            <option value="Kuda Bank">Kuda Bank</option>
+            <option value="Moniepoint">Moniepoint</option>
+          </select>
+        </div>
+        <div class="input-group">
+          <label for="link-bank-number">10-Digit NUBAN</label>
+          <input type="text" id="link-bank-number" placeholder="Enter external NUBAN" maxlength="10" required>
+        </div>
+        <div class="input-group">
+          <label for="link-bank-bvn">Confirm BVN (Matches registration)</label>
+          <input type="text" id="link-bank-bvn" placeholder="Enter registered BVN" maxlength="11" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Link External Wallet Balance</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 8. SECURITY PIN CONFIRMATION AUTHORIZER MODAL -->
+  <div id="secure-pin-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 400px; text-align: center;">
+      <div class="modal-header">
+        <h3>Secure Authorization Required</h3>
+      </div>
+      <form id="secure-pin-form">
+        <p class="subtitle">Enter your 4-digit transaction security PIN to authorize this action.</p>
+        <div class="pin-entry-boxes">
+          <input type="password" id="pin-input-field" maxlength="4" pattern="\d{4}" placeholder="••••" required autofocus style="text-align: center; font-size: 2rem; letter-spacing: 1.5rem; padding-left: 2rem;">
+        </div>
+        <div class="modal-btn-row" style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary btn-block" id="btn-cancel-pin-auth">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-block">Authorize</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 9. SECURITY OTP MODAL -->
+  <div id="secure-otp-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 400px; text-align: center;">
+      <div class="modal-header">
+        <h3>High Value Transfer Security OTP</h3>
+      </div>
+      <form id="secure-otp-form">
+        <p class="subtitle">A secure verification code was simulated on your account. Enter it below to settle transaction.</p>
+        <div class="otp-code-hint" style="background: hsla(225, 20%, 25%, 0.4); padding: 0.5rem; border-radius: 8px; font-family: monospace; font-size: 1rem; color: var(--accent-secondary); margin-bottom: 1.5rem;" id="otp-hint-code-label">OTP: 000000</div>
+        <div class="input-group">
+          <input type="text" id="otp-input-field" maxlength="6" placeholder="Enter 6-digit OTP" required style="text-align: center; font-size: 1.3rem;">
+        </div>
+        <div class="modal-btn-row" style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary btn-block" id="btn-cancel-otp-auth">Cancel</button>
+          <button type="submit" class="btn btn-primary btn-block">Verify & Settle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 10. TRANSACTION RECEIPT DOWNLOAD MODAL -->
+  <div id="receipt-modal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 480px;">
+      <div class="modal-header">
+        <h3>Transaction Receipt</h3>
+        <button class="btn-close-modal" id="btn-close-receipt-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="receipt-card-body" id="receipt-details-panel">
+        <!-- Loaded dynamically -->
+      </div>
+      <div class="receipt-actions-row" style="display: flex; gap: 0.5rem; margin-top: 1.5rem;">
+        <button class="btn btn-secondary btn-block" id="btn-share-receipt-mock"><i class="fa-solid fa-share-nodes"></i> Share Receipt</button>
+        <button class="btn btn-primary btn-block" id="btn-download-receipt-pdf"><i class="fa-solid fa-download"></i> Download PDF Receipt</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. OCR RECEIPT SCANNER MODAL -->
+  <div id="ocr-scanner-modal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Receipt OCR Scanner</h3>
+        <button class="btn-close-modal" id="btn-close-ocr-modal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="ocr-upload-form">
+        <p class="subtitle">Upload a photo of a shopping receipt to automatically parse and extract transaction amounts.</p>
+        <div class="ocr-drag-box" id="ocr-drag-box">
+          <i class="fa-solid fa-receipt" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 0.5rem;"></i>
+          <span>Drag image here or click to select</span>
+          <input type="file" id="ocr-file-input" style="display:none;" accept="image/*">
+        </div>
+        <button type="submit" class="btn btn-primary btn-block" id="btn-start-ocr-scan" style="margin-top: 1rem;">Start OCR Extraction</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- App Script -->
+  <script src="app.js"></script>
+</body>
+</html>
