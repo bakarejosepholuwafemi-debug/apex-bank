@@ -2827,3 +2827,183 @@ body {
   }
 }
 
+/* ─────────────────────────────────────────────────────────────
+   COMPREHENSIVE RESPONSIVENESS OVERRIDES (240px to 8K Displays)
+   ───────────────────────────────────────────────────────────── */
+
+/* Universal min-width reset to prevent unexpected layout overflows */
+*, *::before, *::after {
+  min-width: 0;
+}
+
+/* 8K Screens */
+@media (min-width: 7680px) {
+  html { font-size: 36px; }
+}
+/* 6K Screens */
+@media (min-width: 6000px) {
+  html { font-size: 28px; }
+}
+/* 4K Screens */
+@media (min-width: 3840px) {
+  html { font-size: 24px; }
+}
+/* QHD/2K Screens */
+@media (min-width: 2560px) {
+  html { font-size: 20px; }
+}
+/* Full HD Screens */
+@media (min-width: 1920px) {
+  html { font-size: 18px; }
+}
+
+/* Mobile & Tablet Overrides (< 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 260px;
+  }
+  
+  .sidebar-toggle-btn {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: hsla(225, 20%, 22%, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    color: var(--text-primary);
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: calc(-1 * var(--sidebar-width));
+    width: var(--sidebar-width);
+    height: 100%;
+    z-index: 9999;
+    box-shadow: 10px 0 30px rgba(0, 0, 0, 0.7);
+    transition: left 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .sidebar.open {
+    left: 0 !important;
+  }
+
+  .app-container {
+    display: block; /* sidebar is now overlay */
+  }
+
+  .main-content {
+    padding: 1.5rem 1rem;
+    width: 100%;
+  }
+  
+  /* Stack grid layouts */
+  .charts-row, .split-row, .transfer-row, .qr-payments-layout, .ussd-emulator-layout, .cards-view-layout, .goals-grid, .invest-grid, .compliance-grid, .rewards-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .dashboard-five-grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+  }
+  
+  .linked-banks-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  }
+
+  .utilities-launcher-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Phones (< 768px) */
+@media (max-width: 768px) {
+  .dashboard-five-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .utilities-launcher-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+  
+  .top-nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .top-nav-right {
+    justify-content: flex-end;
+  }
+  
+  .greeting-box h1 {
+    font-size: 1.35rem;
+  }
+}
+
+/* Small Phones (< 480px) */
+@media (max-width: 480px) {
+  .utilities-launcher-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+  }
+  
+  .auth-card {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  .brand-logo {
+    font-size: 1.6rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+}
+
+/* Tiny Devices (< 320px) */
+@media (max-width: 320px) {
+  html {
+    font-size: 13px;
+  }
+  
+  .utilities-launcher-grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .auth-card {
+    padding: 1rem;
+  }
+  
+  .nav-item span {
+    font-size: 0.85rem;
+  }
+}
+
+/* Ultra Tiny Viewports (down to 240px) */
+@media (max-width: 240px) {
+  html {
+    font-size: 11px;
+  }
+  
+  .sidebar {
+    width: 100vw;
+    left: -100vw;
+  }
+  
+  .top-nav-right {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+}
+
+
